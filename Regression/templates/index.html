@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Units Sold</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+        .container {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            color: green;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Predict Units Sold</h2>
+        <form method="POST" action="/predict">
+            <label>Product Category</label>
+            <select name="product_category">
+                <option>Toys</option>
+                <option>Clothing</option>
+                <option>Electronics</option>
+                <option>Stationery</option>
+            </select>
+
+            <label>Store Location</label>
+            <select name="store_location">
+                <option>New York</option>
+                <option>Los Angeles</option>
+                <option>Houston</option>
+                <option>Chicago</option>
+                <option>Phoenix</option>
+            </select>
+
+            <label>Day of Week</label>
+            <select name="day_of_week">
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+            </select>
+
+            <label>Holiday Week (0 or 1)</label>
+            <input type="number" name="holiday_week" required>
+
+            <label>Promotion Applied (0 or 1)</label>
+            <input type="number" name="promotion_applied" required>
+
+            <label>Price</label>
+            <input type="number" step="0.01" name="price" required>
+
+            <label>Last Week Sales</label>
+            <input type="number" step="0.01" name="last_week_sales" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
